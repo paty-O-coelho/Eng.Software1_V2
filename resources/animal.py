@@ -1,10 +1,6 @@
 from flask_restful import Resource,reqparse
 from models.animal import AnimalModel
 
-animais = [
-{'animal_nome': 'pichula',
-'idade': 1,
-'dono': 'patricia'}]
 
 class Animais (Resource):
     def get (self):
@@ -14,12 +10,11 @@ class Animal (Resource):
     argumentos = reqparse.RequestParser()
     argumentos.add_argument('idade')
     argumentos.add_argument('dono')
-
-    def encontra_animal(animal_nome):
-        for animal in animais:
-            if animal['animal_nome'] == animal_nome:
-                return animal
-        return None
+    argumentos.add_argument('tipo')
+    argumentos.add_argument('sexo')
+    argumentos.add_argument('cor')
+    argumentos.add_argument('end')
+    argumentos.add_argument('foto')
 
     def get(self, animal_nome):
         animal  = AnimalModel.encontra_animal(animal_nome)
@@ -29,8 +24,7 @@ class Animal (Resource):
 
     def post(self,animal_nome):
         if AnimalModel.encontra_animal(animal_nome):
-            return {'message': 'Animal "{}" já cadastrado'.format(animal_nome)}, 400
-
+            return {"message": "Animal '{}' já cadastrado".format(animal_nome)}, 400
 
         dados = Animal.argumentos.parse_args()
         animal = AnimalModel(animal_nome, **dados)

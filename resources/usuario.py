@@ -8,7 +8,7 @@ class User (Resource):
         user  = UserModel.encontra_user(user_id)
         if user :
             return user.json()
-        return {'message': 'usuario não disponivel'}, 404
+        return {'message': 'usuario não existe'}, 404
 
     def delete(self, user_id):
         user = UserModel.encontra_user(user_id)
@@ -20,8 +20,15 @@ class User (Resource):
 class UserRegister(Resource):
     def post (self):
         atributos = reqparse.RequestParser()
+
         atributos.add_argument('login',type=str, required=True, help="O campo login, não pode ficar vazio!")
         atributos.add_argument('senha',type=str, required=True, help="O campo senha, não pode ficar vazio!")
+        atributos.add_argument('tipo',type=str, required=True, help="O campo tipo, não pode ficar vazio!")
+        atributos.add_argument('nome',type=str, required=True, help="O campo nome, não pode ficar vazio!")
+        atributos.add_argument('cpf',type=str, required=True, help="O campo cpf, não pode ficar vazio!")
+        atributos.add_argument('end',type=str, required=True, help="O campo endereço, não pode ficar vazio!")
+        atributos.add_argument('tel',type=str, required=True, help="O campo telefone, não pode ficar vazio!")
+
         dados =  atributos.parse_args()
 
         if UserModel.encontra_por_login(dados['login']):
