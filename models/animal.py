@@ -13,7 +13,6 @@ class AnimalModel(banco.Model):
     foto = banco.Column(banco.String(80))
     
 
-
     def __init__(self,animal_nome,idade,dono,tipo,sexo,cor,end,foto):
         self.animal_nome = animal_nome
         self.idade = idade

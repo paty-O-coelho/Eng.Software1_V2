@@ -32,7 +32,7 @@ class Animal (Resource):
             animal.save_animal()
         except:
             return {'message': 'Não foi possivel salvar o PET'}
-        return animal.json()
+        return animal.json(),201
 
     def put(self, animal_nome):
         dados = Animal.argumentos.parse_args()
