@@ -1,5 +1,6 @@
 from flask_restful import Resource,reqparse
 from models.animal import AnimalModel
+from flask_jwt_extended import jwt_required
 
 
 class Animais (Resource):
@@ -21,7 +22,7 @@ class Animal (Resource):
         if animal :
             return animal.json()
         return {'message': 'animal não disponivel'}, 404
-
+    @jwt_required
     def post(self,animal_nome):
         if AnimalModel.encontra_animal(animal_nome):
             return {"message": "Animal '{}' já cadastrado".format(animal_nome)}, 400
@@ -33,7 +34,7 @@ class Animal (Resource):
         except:
             return {'message': 'Não foi possivel salvar o PET'}
         return animal.json(),201
-
+    @jwt_required
     def put(self, animal_nome):
         dados = Animal.argumentos.parse_args()
         animal_encontrado =  AnimalModel.encontra_animal(animal_nome)
@@ -46,7 +47,7 @@ class Animal (Resource):
         animal.save_animal()
         return animal.json(),201
 
-
+    @jwt_required
     def delete(self, animal_nome):
         animal = AnimalModel.encontra_animal(animal_nome)
         if animal:

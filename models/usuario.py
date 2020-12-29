@@ -6,32 +6,31 @@ class UserModel(banco.Model):
     user_id = banco.Column(banco.Integer, primary_key = True)
     login = banco.Column(banco.String(80))
     senha = banco.Column(banco.String(20))
-    tipo = banco.Column(banco.String(20))
-    nome = banco.Column(banco.String(20))
-    cpf = banco.Column(banco.Integer)
-    end = banco.Column(banco.String(80))
-    tel = banco.Column(banco.String(20))
-    #nome, cpf, end,tel
+    # tipo = banco.Column(banco.String(20))
+    # nome = banco.Column(banco.String(20))
+    # cpf = banco.Column(banco.Integer)
+    # end = banco.Column(banco.String(80))
+    # tel = banco.Column(banco.String(20))
 
-    def __init__(self,login,senha, tipo, nome, cpf,end,tel):
+    def __init__(self,login,senha):
         self.login = login
         self.senha = senha
-        self.tipo = tipo
-        self.nome = nome
-        self.cpf = cpf
-        self.end = end
-        self.tel = tel
+        # self.tipo = tipo
+        # self.nome = nome
+        # self.cpf = cpf
+        # self.end = end
+        # self.tel = tel
 
 
     def json(self):
         return {
         'user_id': self.user_id,
-        'login': self.login,
-        'tipo':self.tipo,
-        'nome':self.nome,
-        'cpf':self.cpf,
-        'end':self.end,
-        'tel':self.tel
+        'login': self.login
+        # 'tipo':self.tipo,
+        # 'nome':self.nome,
+        # 'cpf':self.cpf,
+        # 'end':self.end,
+        # 'tel':self.tel
         }
 
     #metodo de classe
