@@ -39,4 +39,5 @@ if __name__ == '__main__':
     from sql_alchemy import banco
     banco.init_app(app)
     app.run(debug= True)
-#http://127.0.0.1:5000/animais
+
+#link onde roda a api http://127.0.0.1:5000/animais
